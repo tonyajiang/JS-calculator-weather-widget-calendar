@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<head>
+    <title>Calculator</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Bungee+Hairline|Bungee+Inline|Poiret+One" rel="stylesheet">
+</head>
+<body>
+	<h1>Calculator</h1>
+    <br/>
+    <form id="form" name="input">
+         First number: <input type="number" id="firstNum" name="num1"/>
+         Second number: <input type="number" id="secondNum" name="num2"/>
+        <br/>
+        <br/>
+         <input type="radio" name="operation" value="add" id="addinput"/><label for = "addinput">Add</label>
+         <input type="radio" name="operation" value="subtract" id="subtractinput"/><label for="subtractinput">Subtract</label>
+         <input type="radio" name="operation" value="multiply" id="multiplyinput"/><label for="multiplyinput">Multiply</label>
+         <input type="radio" name="operation" value="divide" id="divideinput"/><label for="divideinput">Divide</label>
+        <br/>
+        <br/>
+    </form>
+	<h2 id="demo"></h2>
+	<script>
+		//Functions for each operation
+		function add() {
+			var x = document.getElementById("form");
+			var z;
+			var i;
+			for (i = 0; i < 2 ;i++) {
+				var a = x.elements[0].value;
+				var b = x.elements[1].value;
+				if(a === "" || b === ""){
+					document.getElementById("demo").innerHTML = "Please enter some numbers";
+				}
+				else{
+					z = (+a) + (+b);
+					document.getElementById("demo").innerHTML = z;
+				}	
+			}
+		}
+			
+		function sub() {
+			var x = document.getElementById("form");
+			var z;
+			var i;
+			for (i = 0; i < 2 ;i++) {
+				var a = x.elements[0].value;
+				var b = x.elements[1].value;
+				if(a === "" || b === ""){
+					document.getElementById("demo").innerHTML = "Please enter some numbers";
+				}
+				else{
+					z = (+a) - (+b);
+					document.getElementById("demo").innerHTML = z;
+				}	
+			}
+		}
+			
+		function mult() {
+			var x = document.getElementById("form");
+			var z;
+			var i;
+		    for (i = 0; i < 2 ;i++) {
+				var a = x.elements[0].value;
+				var b = x.elements[1].value;
+				if(a === "" || b === ""){
+					document.getElementById("demo").innerHTML = "Please enter some numbers";
+				}
+				else{
+					z = (+a) * (+b);
+					document.getElementById("demo").innerHTML = z;
+				}	
+		    }
+		}
+			
+		function div() {
+		    var x = document.getElementById("form");
+		    var z;
+		    var i;
+		    for (i = 0; i < 2 ;i++) {
+				var a = x.elements[0].value;
+				var b = x.elements[1].value;
+				if(b == "0"){
+					document.getElementById("demo").innerHTML = "Can't divide by Zero";
+				}
+				else if(a === "" || b === ""){
+					document.getElementById("demo").innerHTML = "Please enter some numbers";
+				}
+				else{
+					z = (+a) / (+b);
+					document.getElementById("demo").innerHTML = z;
+				}
+		    }
+		}
+		
+		//func finds which radio button is checked and then calls the appropriate operation function
+		function func(){
+			var func_radio = document.getElementsByName("operation");
+			var which_oper = null;
+			for(var i=0; i<func_radio.length; i++){
+			    if(func_radio[i].checked){
+			        which_oper = func_radio[i].value;
+					break;            
+				}   	 
+			}
+			document.getElementById("demo").innerHTML = which_oper;
+			
+			if(which_oper == "add"){
+				add();
+			}
+			if(which_oper == "subtract"){
+				sub();
+			}
+			if(which_oper == "multiply"){
+				mult();
+			}
+			if(which_oper == "divide"){
+				div();
+			}
+		}
+		
+		//event listeners for the radio buttons and changing the text fields
+		document.getElementById("addinput").addEventListener("click", func, false);
+		document.getElementById("subtractinput").addEventListener("click", func, false);
+		document.getElementById("multiplyinput").addEventListener("click", func, false);
+		document.getElementById("divideinput").addEventListener("click", func, false);
+		document.getElementById("firstNum").addEventListener("change", func, false);
+		document.getElementById("secondNum").addEventListener("change", func, false);
+	</script>
+</body>
+</html>
+
+

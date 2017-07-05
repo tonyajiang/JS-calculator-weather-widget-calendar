@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather</title>
+	<link rel="stylesheet" type="text/css" href="http://classes.engineering.wustl.edu/cse330/content/weather.css">
+	<script>
+		function fetchWeather(){
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.open("GET", "http://classes.engineering.wustl.edu/cse330/content/weather_json.php", true);
+			xmlHttp.addEventListener("load", ajaxCallback, false);
+			xmlHttp.send(null);
+		}
+		function ajaxCallback(event){
+			document.getElementById("myBtn").addEventListener("click", fetchWeather, false);
+			var jsonData = JSON.parse(event.target.responseText);
+			var loc = document.getElementsByClassName("weather-loc")[0];
+			
+			loc.innerHTML = (jsonData.location.city).bold() + "  " + jsonData.location.state;
+			document.getElementsByClassName("weather-humidity")[0].innerHTML = jsonData.atmosphere.humidity;
+			document.getElementsByClassName("weather-temp")[0].innerHTML = jsonData.current.temp;
+			document.getElementsByClassName("weather-tomorrow")[0].src = 'http://us.yimg.com/i/us/nws/weather/gr/'+jsonData.tomorrow.code+'ds.png';
+			document.getElementsByClassName("weather-dayaftertomorrow")[0].src = 'http://us.yimg.com/i/us/nws/weather/gr/'+jsonData.dayafter.code+'ds.png';
+		}
+		document.addEventListener("DOMContentLoaded", fetchWeather, false);
+		document.getElementById("myBtn").addEventListener("click", fetchWeather, false);
+	</script>
+</head>
+<body>
+	<p id="demo"></p>	
+	<div class="weather" id="weatherWidget">
+	<div class="weather-loc"></div>
+	<div class="weather-humidity"></div>
+	<div class="weather-temp"></div>
+	<img class="weather-tomorrow" />
+	<img class="weather-dayaftertomorrow" />
+</div>
+	<button id="myBtn">Refresh</button>
+</body>
+</html>

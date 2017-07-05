@@ -1,0 +1,9 @@
+CREATE TABLE `events` (
+  `title` varchar(50) NOT NULL,
+  `event_id` smallint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `date` varchar(255) NOT NULL,
+  `time` smallint(20) NOT NULL,
+  `user` varchar(50),
+  PRIMARY KEY (event_id),
+  FOREIGN KEY (user) references `users` (username)
+);
